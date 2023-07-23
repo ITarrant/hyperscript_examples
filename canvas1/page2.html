@@ -1,0 +1,54 @@
+<canvas id="main" width="300" height="300" style="background-color:white;" class="m-2"
+        _="init
+            set element canvasTop to me.offsetTop
+            set element canvasLeft to me.offsetLeft
+            set element context to me.getContext('2d')
+            initCanvas(context)
+            set element lastx to 0
+            set element lasty to 0
+        on touchstart
+            set lastx to event.touches[0].clientX - canvasLeft
+            set lasty to event.touches[0].clientY - canvasTop
+            dot(context,lastx,lasty)
+            end
+        on touchmove
+            set newx to event.touches[0].clientX - canvasLeft
+            set newy to event.touches[0].clientY - canvasTop
+            line(context,lastx,lasty,newx,newy)
+            set lastx to newx
+            set lasty to newy
+            end
+        on clearCanvas
+            clear(context)
+            end">
+
+</canvas>
+<button id="clear" class="btn btn-primary"
+        _="on click send clearCanvas to #main">clear</button>
+
+<script type="text/hyperscript">
+    def initCanvas(ctx)
+        set ctx.strokeStyle to '#000000'
+        set ctx.lineCap to 'round'
+        set ctx.lineJoin to 'round'
+        set ctx.lineWidth to 2
+    end
+    def dot(ctx,x,y)
+        ctx.beginPath()
+        set ctx.fillstyle to '#000000'
+        ctx.arc(x,y,1,0,Math.PI*2,true)
+        ctx.fill()
+        ctx.stroke()
+        ctx.closePath()
+    end
+    def line(ctx,fromx,fromy,tox,toy)
+        ctx.beginPath()
+        ctx.moveTo(fromx,fromy)
+        ctx.lineTo(tox,toy)
+        ctx.stroke()
+        ctx.closePath()
+    end
+    def clear(ctx)
+        ctx.clearRect(0,0,ctx.canvas.width, ctx.canvas.height)
+    end
+</script>
