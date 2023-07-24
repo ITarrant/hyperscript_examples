@@ -6,10 +6,10 @@ Page1.html sets up a button to load the contents of Page2.html using HTMX.
 The page now contains the canvas element and a clear button. This is setup for touch events, but could be easily changed for mouse click events.
 If you want to do something with the canvas after being drawn on, you can add a hidden input in a form and submit the canvas to the backend as a Base64 image.
 
-<form>
+```<form>
   ...
   <canvas id="main"></canvas>
   <input hidden id="canvasImg" name="signature">
   <button class="btn btn-primary btn-sm" type="submit" id="actionSubmit"
       _="on click set #canvasImg's value to #main.toDataURL()">Perform Action</button>
-</form>
+</form>```
